@@ -1,27 +1,3 @@
-<template>
-  <div class="form">
-    <form name="recherche" @submit.prevent="rechercheMedicament(recherche)" disabled>
-      <input type="text" v-model="recherche" placeholder="Que recherchez-vous ?" required />
-      <button type="submit">Rechercher</button>
-    </form>
-  </div>
-  <br><br>
-  <div
-      v-for="medicament in listeRecherche"
-      :key="medicament.id">
-    <div>{{medicament.denomination}}</div>
-    <ul>
-      <div>Quantite en stock: {{medicament.qte}} </div>
-    </ul>
-  </div>
-  <br><br>
-</template>
-
-<style scoped>
-
-</style>
-
-
 <script setup>
 import { reactive } from 'vue'
 import Medicament from "../Medicament.js"
@@ -48,3 +24,26 @@ function rechercheMedicament(motcle){
 }
 
 </script>
+
+<template>
+  <div class="form">
+    <form name="recherche" @submit.prevent="rechercheMedicament(recherche)" disabled>
+      <input type="text" v-model="recherche" placeholder="Que recherchez-vous ?" required />
+      <button type="submit">Rechercher</button>
+    </form>
+  </div>
+  <br><br>
+  <div
+      v-for="medicament in listeRecherche"
+      :key="medicament.id">
+    <div>{{medicament.denomination}}</div>
+    <ul>
+      <div>Quantite en stock: {{medicament.qte}} </div>
+    </ul>
+  </div>
+  <br><br>
+</template>
+
+<style scoped>
+
+</style>

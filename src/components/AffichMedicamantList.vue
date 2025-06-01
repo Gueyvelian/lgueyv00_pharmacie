@@ -101,7 +101,6 @@ function modifier(medicament) {
     <div>{{medicament.denomination}}</div>
     <ul>
       <div>Quantite en stock: {{medicament.qte}} </div>
-      <div>Quantiter réservé dans une commande: </div>
       <div>Sous forme de: {{medicament.formepharmaceutique}}</div>
     </ul>
 
