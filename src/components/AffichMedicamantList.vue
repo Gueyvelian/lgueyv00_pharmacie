@@ -4,6 +4,7 @@ import PharmacieItem from "@/components/PharmacieItem.vue";
 const url = "https://apipharmacie.pecatte.fr/api/8/medicaments"
 const listMedicamant = reactive([]);
 
+
 function getMedicaments() {
   const fetchOptions = { method: "GET" };
   fetch(url, fetchOptions)
@@ -41,14 +42,54 @@ function handlerDelete(id){
       .catch((error) => console.log(error));
 }
 
-function AjouteQte(medicamant){
-  medicamant.qte = medicamant.qte + 1;
-  console.log(medicamant.qte);
+function modifQuantite(medicament,qte) {
+  console.log(qte);
+  if(qte<=0){
+    console.log("oui");
+    handlerDelete(medicament.id);
+  }
+
+  let myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+  const fetchOptions = {
+    method: "PUT",
+    headers: myHeaders,
+    body: JSON.stringify({id: medicament.id,denomination : medicament.denomination,formepharmaceutique: medicament.formepharmaceutique, photo:medicament.photo,qte:qte}),
+  };
+  fetch(url, fetchOptions)
+      .then((response) =>{ return response.json();
+      })
+      .then((dataJSON) => {
+        console.log(dataJSON); //renvoie : {"status" : 0 ou 1}, savoir si ça a marché ou non
+        getMedicaments(); //actualisation
+      })
+      .catch((error) => console.log(error));
 }
 
-function modifier(index){
+function modifier(medicament) {
+  const fetchOptions = {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      id: medicament.id,
+      denomination: medicament.denomination,
+      formepharmaceutique: medicament.formepharmaceutique,
+      photo: medicament.photo,
+      qte: medicament.qte,
+    }),
+  };
 
+  fetch(url, fetchOptions)
+      .then((response) => response.json())
+      .then((dataJSON) => {
+        console.log( dataJSON);
+        getMedicaments();
+      })
+      .catch((error) => console.error(error));
 }
+
 
 </script>
 
@@ -69,7 +110,7 @@ function modifier(index){
         :medicamant="medicament"
         :indexMedicamant="index"
         @eventDeleteItem="handlerDelete"
-        @eventAjouteQteItem="AjouteQte"
+        @eventModifQteItem="modifQuantite"
         @eventModifier="modifier"/>
 
     <img :src="'https://apipharmacie.pecatte.fr/images/' + medicament.photo" alt="L'image du médicament" class="image"/>
@@ -79,9 +120,7 @@ function modifier(index){
 
 <style scoped>
 .image {
-  width: 300px;
   height: 230px;
-  object-fit: cover;
   border-radius: 8px;
   margin: 50px;
 }

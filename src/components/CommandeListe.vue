@@ -8,9 +8,7 @@ const text = ref("")
 
 <template>
   <form @submit.prevent="$emit('eventListComande', ListCommande)">
-    <ul>
-      <li></li>
-    </ul>
+
   </form>
 </template>
 
