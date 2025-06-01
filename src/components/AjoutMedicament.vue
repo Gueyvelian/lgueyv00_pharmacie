@@ -3,10 +3,10 @@ import {ref} from "vue";
 const url = "https://apipharmacie.pecatte.fr/api/8/medicaments"
 const emit = defineEmits(['medicamentAjoute']);
 
-const denomination = ref('');
-const formepharmaceutique = ref('');
+const denomination = ref("");
+const formepharmaceutique = ref("");
 const qte = ref(0);
-const photo = ref('');
+const photo = ref("");
 
 function ajoutMedicament(denomination,formepharmaceutique,photo, qte) { // ce qui est sortie du formulaire
   let myHeaders = new Headers();

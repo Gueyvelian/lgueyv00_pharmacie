@@ -30,6 +30,7 @@ function rafraichirListeMedicaments() {
   }
 }
 
+
 </script>
 
 <template>
@@ -40,7 +41,9 @@ function rafraichirListeMedicaments() {
     <button @click="ajouterChampCommande">Faire une commande</button>
     <div v-if="afficher">
       <div>
-        <FaireCommande/>
+        <FaireCommande
+            :listCommande="listCommande"
+            @eventAjout="handlerAdd"/>
       </div>
     </div>
 

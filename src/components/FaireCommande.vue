@@ -1,17 +1,28 @@
 <script setup>
-defineProps(["listeCommande"]);
-import Commande from "../Commande.js";
+import {ref} from "vue";
+import Commande from "@/Commande.js";
+
+const props = defineProps(["listCommande"]);
+const commandeNom = ref ("");
+const medicament = ref ("");
+const medicamentQuantiter = ref ("");
+
+
+function nouvellecommande(){
+  let newCommande = new Commande(commandeNom, medicament, medicamentQuantiter);
+  props.listCommande.push(newCommande);
+  console.log("les nouvelle commande");
+}
+
 </script>
 
-<template>
-  <form @submit.prevent="$emit('eventFaireCommande', Commande)">
 
-    <input type="text" v-model="commandeNom" placeholder="Nom du demandeur" />
-    <input type="text" v-model="commandePrenom" placeholder="Prenom du demandeur" />
-    <input type="text" v-model="medicamantNombre" placeholder="Nombre de médicament diferent" />
-    <input type="text" v-model="medicamant" placeholder="Medicamant" />
-    <input type="text" v-model="medicamantQuantiter" placeholder="Quantiter" />
-    <button>Ajouter un Medicament</button>
+<template>
+  <form @submit.prevent="nouvellecommande(commandeNom, medicament, medicamentQuantiter)">
+
+    <input type="text" v-model="commandeNom" placeholder="Nom du demandeur" required/>
+    <input type="text" v-model="medicament" placeholder="Medicamant" required/>
+    <input type="number" v-model="medicamentQuantiter" placeholder="Quantiter" required/>
     <input type="submit" value="valider" />
   </form>
 
