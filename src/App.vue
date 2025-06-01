@@ -7,4 +7,5 @@ import Pharmacie from "@/components/Pharmacie.vue";
 </template>
 
 <style scoped>
+
 </style>

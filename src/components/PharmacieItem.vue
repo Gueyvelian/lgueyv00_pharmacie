@@ -1,5 +1,3 @@
-
-
 <script setup>
 import {ref} from "vue";
 
@@ -54,9 +52,5 @@ function validerModification() {
 </template>
 
 <style scoped>
-.item {
-  height: 250px;
-  object-fit: cover;
-  border-radius: 8px;
-}
+
 </style>

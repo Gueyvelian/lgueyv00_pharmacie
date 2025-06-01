@@ -1,29 +1,46 @@
 export default class Commande {
-    constructor (texte, listMedicamant) {
-        this._texte = texte;
-        this._id = Date.now() + Math.floor(Math.random()*10) // génération d'un id unique
+    constructor (commandeNom, medicamants, medicamantQuantiter) {
+        this._id = Date.now() + Math.floor(Math.random()*10)
+        this._commandeNom = commandeNom;
+        this._medicamant = medicamants;
+        this._medicamantQuantiter = medicamantQuantiter;
     }
-    get texte() {
-        return this._texte;
+
+
+    get commandeNom() {
+        return this._commandeNom;
     }
+
+    set commandeNom(value) {
+        this._commandeNom = value;
+    }
+
+
+    get medicamant() {
+        return this._medicamant;
+    }
+
+    set medicamant(value) {
+        this._medicamant = value;
+    }
+
+    get medicamantQuantiter() {
+        return this._medicamantQuantiter;
+    }
+
+    set medicamantQuantiter(value) {
+        this._medicamantQuantiter = value;
+    }
+
     get id() {
         return this._id;
     }
-    get fait() {
-        return this._fait;
+
+    set id(value) {
+        this._id = value;
     }
-    get listMedicamant() {
-        return this.listMedicamant;
-    }
-// modifier fait / pas fait
-    faire() {
-        this._fait = !this._fait;
-    }
-// modifier le texte
-    set texte(texte) {
-        this._texte = texte;
-    }
+
     pourAfficher() {
-        return `--> ${this._texte} (${ this._fait ? "fait" : "à faire"})`;
+        return this.commandeNom + ": " + this._medicamantQuantiter + " " +this._medicamant ;
     }
 }

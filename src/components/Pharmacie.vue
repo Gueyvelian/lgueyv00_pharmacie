@@ -1,15 +1,15 @@
 <script setup>
 import AffichMedicamantList from "@/components/AffichMedicamantList.vue";
 import {reactive, ref} from "vue";
-import CommandeListe from "@/components/CommandeListe.vue";
 import FaireCommande from "@/components/FaireCommande.vue";
 import AjoutMedicament from "@/components/AjoutMedicament.vue";
-import Medicament from "@/Medicament.js";
+import RechercherMedicament from "@/components/RechercherMedicament.vue";
+import Commande from "@/Commande.js";
 const afficher = ref(false)
-const afficherListe = ref(false)
 const nouveauMedicament = ref(false)
 const nouvelleListe = ref(null);
-
+const listCommande = reactive([new Commande("Dupont", "Doliprane", 5), new Commande("Lemont", "Doliprane", 5)])
+let afficherListe = ref(false);
 
 function ajouterChampCommande() {
   afficher.value = !afficher.value
@@ -21,7 +21,6 @@ function aficherListeCommande() {
 
 function ajouterChampMedicament() {
   nouveauMedicament.value = !nouveauMedicament.value
-  console.log(nouveauMedicament.value)
 }
 
 
@@ -37,7 +36,7 @@ function rafraichirListeMedicaments() {
   <ul>
     <h1>Stock de la pharmacie</h1>
     <CommandeListe/>
-    <button>Rechercher un medicamant</button>
+    <RechercherMedicament/>
     <button @click="ajouterChampCommande">Faire une commande</button>
     <div v-if="afficher">
       <div>
@@ -47,10 +46,11 @@ function rafraichirListeMedicaments() {
 
     <button @click="aficherListeCommande">Liste des commandes client</button>
     <div v-if="afficherListe">
-      <div>
-        <CommandeListe
-            :listComande="listComande"
-            @eventListComande="handlerListComande"/>
+      <div>Commandes passé: </div>
+      <div
+        v-for="(commande, index) in listCommande"
+        :key="commande.id">
+          <div>{{commande.pourAfficher()}}</div>
       </div>
     </div>
 

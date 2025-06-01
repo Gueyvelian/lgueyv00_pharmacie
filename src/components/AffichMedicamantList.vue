@@ -97,8 +97,7 @@ function modifier(medicament) {
   <h3>Liste des médicaments</h3>
   <div
       v-for="(medicament, index) in listMedicamant"
-      :key="medicament.id"
-      class="film-item">
+      :key="medicament.id">
     <div>{{medicament.denomination}}</div>
     <ul>
       <div>Quantite en stock: {{medicament.qte}} </div>
