@@ -42,28 +42,13 @@ function handlerDelete(id){
       .catch((error) => console.log(error));
 }
 
-function modifQuantite(medicament,qte) {
-  console.log(qte);
-  if(qte<=0){
+function modifQuantite(medicament) {
+  delete medicament.photo;
+  if(medicament.qte<=0){
     console.log("oui");
     handlerDelete(medicament.id);
   }
-
-  let myHeaders = new Headers();
-  myHeaders.append("Content-Type", "application/json");
-  const fetchOptions = {
-    method: "PUT",
-    headers: myHeaders,
-    body: JSON.stringify({id: medicament.id,denomination : medicament.denomination,formepharmaceutique: medicament.formepharmaceutique, photo:medicament.photo,qte:qte}),
-  };
-  fetch(url, fetchOptions)
-      .then((response) =>{ return response.json();
-      })
-      .then((dataJSON) => {
-        console.log(dataJSON); //renvoie : {"status" : 0 ou 1}, savoir si ça a marché ou non
-        getMedicaments(); //actualisation
-      })
-      .catch((error) => console.log(error));
+  modifier(medicament);
 }
 
 function modifier(medicament) {
@@ -95,32 +80,24 @@ function modifier(medicament) {
 
 <template>
   <h3>Liste des médicaments</h3>
-  <div
-      v-for="(medicament, index) in listMedicamant"
-      :key="medicament.id">
-    <div>{{medicament.denomination}}</div>
-    <ul>
-      <div>Quantite en stock: {{medicament.qte}} </div>
-      <div>Sous forme de: {{medicament.formepharmaceutique}}</div>
-    </ul>
+  <div class="liste">
 
     <PharmacieItem
-        :medicamant="medicament"
+        v-for="(medicament, index) in listMedicamant"
+        :key="medicament.id"
+        :medicament="medicament"
         :indexMedicamant="index"
         @eventDeleteItem="handlerDelete"
         @eventModifQteItem="modifQuantite"
         @eventModifier="modifier"/>
-
-    <img :src="'https://apipharmacie.pecatte.fr/images/' + medicament.photo" alt="L'image du médicament" class="image"/>
-
   </div>
 </template>
 
 <style scoped>
-.image {
-  height: 230px;
-  border-radius: 8px;
-  margin: 50px;
+.liste {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
 
 </style>

@@ -26,12 +26,10 @@ function rechercheMedicament(motcle){
 </script>
 
 <template>
-  <div class="form">
     <form name="recherche" @submit.prevent="rechercheMedicament(recherche)" disabled>
       <input type="text" v-model="recherche" placeholder="Que recherchez-vous ?" required />
       <button type="submit">Rechercher</button>
     </form>
-  </div>
   <br><br>
   <div
       v-for="medicament in listeRecherche"

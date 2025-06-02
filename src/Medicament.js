@@ -1,6 +1,6 @@
 export default class Medicament {
-    constructor(denomination, formepharmaceutique, qte, photo) {
-        this._id = Date.now() + Math.floor(Math.random() * 10)
+    constructor(denomination, formepharmaceutique, qte, photo, id) {
+        this.id = id;
         this._denomination = denomination;
         this._formepharmaceutique = formepharmaceutique;
         this._qte = qte;

@@ -1,9 +1,9 @@
 export default class Commande {
-    constructor (commandeNom, medicamants, medicamantQuantiter) {
+    constructor (commandeNom, medicaments, medicamentQuantiter) {
         this._id = Date.now() + Math.floor(Math.random()*10)
         this._commandeNom = commandeNom;
-        this._medicamant = medicamants;
-        this._medicamantQuantiter = medicamantQuantiter;
+        this._medicament = medicaments;
+        this._medicamentQuantiter = medicamentQuantiter;
     }
 
 
@@ -16,20 +16,20 @@ export default class Commande {
     }
 
 
-    get medicamant() {
-        return this._medicamant;
+    get medicament() {
+        return this._medicament;
     }
 
-    set medicamant(value) {
-        this._medicamant = value;
+    set medicament(value) {
+        this._medicament = value;
     }
 
-    get medicamantQuantiter() {
-        return this._medicamantQuantiter;
+    get medicamentQuantiter() {
+        return this._medicamentQuantiter;
     }
 
     set medicamantQuantiter(value) {
-        this._medicamantQuantiter = value;
+        this._medicamentQuantiter = value;
     }
 
     get id() {
@@ -41,6 +41,6 @@ export default class Commande {
     }
 
     pourAfficher() {
-        return this.commandeNom + ": " + this._medicamantQuantiter + " " +this._medicamant ;
+        return this.commandeNom + ": " + this._medicamentQuantiter + " " +this._medicament ;
     }
 }

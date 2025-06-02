@@ -35,41 +35,28 @@ function rafraichirListeMedicaments() {
 </script>
 
 <template>
-  <ul>
     <h1>Stock de la pharmacie</h1>
-    <CommandeListe/>
     <RechercherMedicament/>
     <button @click="ajouterChampCommande">Faire une commande</button>
-    <div v-if="afficher">
-      <div>
-        <FaireCommande
-            :listCommande="listCommande"
-            @eventAjout="handlerAdd"/>
-      </div>
-    </div>
+
+      <FaireCommande v-if="afficher" :listCommande="listCommande" />
+
 
     <button @click="aficherListeCommande">Liste des commandes client</button>
     <div v-if="afficherListe">
-      <div>Commandes passé: </div>
-      <div
+      <h4>Commandes passées :</h4>
+      <ul
         v-for="(commande, index) in listCommande"
         :key="commande.id">
-          <div>{{commande.pourAfficher()}}</div>
-      </div>
+          <li>{{commande.pourAfficher()}}</li>
+      </ul>
     </div>
 
     <AffichMedicamantList ref="nouvelleListe"/>
 
     <button @click="ajouterChampMedicament">Ajout d'un medicament</button>
 
-    <div v-if="nouveauMedicament">
-      <div>
-        <AjoutMedicament @medicamentAjoute="rafraichirListeMedicaments" />
-      </div>
-    </div>
-
-  </ul>
-
+    <AjoutMedicament v-if="nouveauMedicament" @medicamentAjoute="rafraichirListeMedicaments" />
 </template>
 
 <style scoped>
