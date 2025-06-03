@@ -18,11 +18,9 @@ function fermerModif() {
 }
 
 function validerModification() {
-  console.log("OUUUI", medicamentAModifier.value);
   if(!isNewImage.value) {
     delete medicamentAModifier.value.photo;
   }
-  console.log("POULET", medicamentAModifier.value);
   afficherModif.value = false;
   emit('eventModifier', medicamentAModifier.value);
   isNewImage.value = false;
@@ -35,7 +33,6 @@ const handleFileUpload = (event) => {
   reader.onload = () => {
     medicamentAModifier.value.photo = reader.result
     isNewImage.value = true;
-    console.log("handleFileUpload", medicamentAModifier.value);
   };
   reader.readAsDataURL(file);
 };
@@ -86,6 +83,7 @@ const handleFileUpload = (event) => {
 .card {
   border: 2px solid gray;
   padding: 10px;
+  border-radius: 10px;
 }
 
 .modif {

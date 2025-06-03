@@ -8,8 +8,8 @@ const formepharmaceutique = ref("");
 const qte = ref(0);
 const photo = ref(null);
 
+
 function ajoutMedicament() { // ce qui est sortie du formulaire
-  console.log(photo.value);
   let myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
   const fetchOptions = {
@@ -21,7 +21,6 @@ function ajoutMedicament() { // ce qui est sortie du formulaire
       .then((response) =>{ return response.json()
       })
       .then((dataJSON) => {
-        console.log(dataJSON); //renvoie : {"status" : 0 ou 1}, savoir si ça a marché ou non
         emit('medicamentAjoute'); // récup des données de la BDD (dont le new "produit" ajouté)
       })
       .catch((error) => console.log(error));
@@ -48,7 +47,6 @@ const handleFileUpload = (event) => {
     <input type="text" v-model="denomination" placeholder="Nom du medicament" required/>
     <input type="text" v-model="formepharmaceutique" placeholder="Forme pharmaceutique" required/>
     <input type="number" v-model="qte" placeholder="Quantité" min="1" required/>
-<!--    <input type="text" v-model="photo" placeholder="Photo du medicament" />-->
     <input id="photo" @change="handleFileUpload" type="file" />
     <input type="submit" value="valider" />
   </form>

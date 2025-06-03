@@ -27,6 +27,7 @@ function ajouterChampMedicament() {
 function rafraichirListeMedicaments() {
   if (nouvelleListe.value) {
     nouvelleListe.value.getMedicaments();
+    nouveauMedicament.value = false;
   }
 }
 

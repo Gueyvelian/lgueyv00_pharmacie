@@ -1,8 +1,8 @@
 <script setup>
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
 import Medicament from "../Medicament.js"
 const url = "https://apipharmacie.pecatte.fr/api/8/medicaments";
-
+const recherche = ref("");
 const listeRecherche= reactive([]);
 
 function rechercheMedicament(motcle){
@@ -10,7 +10,6 @@ function rechercheMedicament(motcle){
       .then((response) =>{ return response.json()
       })
       .then( (dataJSON) => {
-        console.log(dataJSON);
         let medicaments = dataJSON //objet au format json
         listeRecherche.splice(0,listeRecherche.length) // vide la liste de 0 à la taille de ma liste avant actualisations sinon comme que des push il y a duplication
         for (let medicament of medicaments){

@@ -2,7 +2,7 @@
 import {reactive} from "vue";
 import PharmacieItem from "@/components/PharmacieItem.vue";
 const url = "https://apipharmacie.pecatte.fr/api/8/medicaments"
-const listMedicamant = reactive([]);
+const listMedicament = reactive([]);
 
 
 function getMedicaments() {
@@ -12,13 +12,10 @@ function getMedicaments() {
         return response.json();
       })
       .then((dataJSON) => {
-        listMedicamant.splice(0, listMedicamant.length);
+        listMedicament.splice(0, listMedicament.length);
         for (let medicament of dataJSON) {
-          console.log (medicament);
-          listMedicamant.push(medicament);
+          listMedicament.push(medicament);
         }
-        console.log(listMedicamant);
-        console.log(dataJSON);
       })
       .catch((error) => {
         console.log(error);
@@ -28,7 +25,6 @@ defineExpose({ getMedicaments });
 getMedicaments();
 
 function handlerDelete(id){
-  console.log(listMedicamant);
   const fetchOptions = {
     method: "DELETE", // je dis que je veux delete
   };
@@ -36,7 +32,6 @@ function handlerDelete(id){
       .then((response) =>{ return response.json()
       })
       .then((dataJSON) => {
-        console.log(dataJSON); //renvoie : {"status" : 0 ou 1}, savoir si ça a marché ou non
         getMedicaments() // récup des données de la BDD (dont le produit suppr)
       })
       .catch((error) => console.log(error));
@@ -45,7 +40,6 @@ function handlerDelete(id){
 function modifQuantite(medicament) {
   delete medicament.photo;
   if(medicament.qte<=0){
-    console.log("oui");
     handlerDelete(medicament.id);
   }
   modifier(medicament);
@@ -69,7 +63,6 @@ function modifier(medicament) {
   fetch(url, fetchOptions)
       .then((response) => response.json())
       .then((dataJSON) => {
-        console.log( dataJSON);
         getMedicaments();
       })
       .catch((error) => console.error(error));
@@ -83,7 +76,7 @@ function modifier(medicament) {
   <div class="liste">
 
     <PharmacieItem
-        v-for="(medicament, index) in listMedicamant"
+        v-for="(medicament, index) in listMedicament"
         :key="medicament.id"
         :medicament="medicament"
         :indexMedicamant="index"
