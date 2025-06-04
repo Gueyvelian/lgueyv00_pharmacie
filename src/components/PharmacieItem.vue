@@ -70,12 +70,10 @@ const handleFileUpload = (event) => {
       </div>
       <br>
       <div class="image">
-        <img :src="'https://apipharmacie.pecatte.fr/images/' + medicament.photo" alt="L'image du médicament" class="image"/>
+        <img v-if="medicament.photo" :src="'https://apipharmacie.pecatte.fr/images/' + medicament.photo" alt="L'image du médicament" class="image"/>
       </div>
     </div>
   </div>
-
-
 
 </template>
 

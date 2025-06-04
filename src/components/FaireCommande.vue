@@ -3,12 +3,14 @@ import {ref} from "vue";
 import Commande from "@/Commande.js";
 
 const props = defineProps(["listCommande"]);
+const emit = defineEmits(["nouvellecommande"]);
 const commandeNom = ref ("");
 const medicament = ref ("");
 const medicamentQuantite = ref ("");
 
 
 function nouvellecommande(){
+  emit("nouvellecommande");
   let newCommande = new Commande(commandeNom.value, medicament.value, medicamentQuantite.value);
   props.listCommande.push(newCommande);
 }

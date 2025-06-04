@@ -10,6 +10,7 @@ const nouveauMedicament = ref(false)
 const nouvelleListe = ref(null);
 const listCommande = reactive([new Commande("Dupont", "Doliprane", 5), new Commande("Lemont", "Doliprane", 5)])
 let afficherListe = ref(false);
+let textBoutonListeCommande = ref("Liste des commandes")
 
 function ajouterChampCommande() {
   afficher.value = !afficher.value
@@ -17,6 +18,12 @@ function ajouterChampCommande() {
 
 function aficherListeCommande() {
   afficherListe.value = !afficherListe.value
+  if (afficherListe.value){
+    textBoutonListeCommande = "Fermer"
+  }
+  else{
+    textBoutonListeCommande = "Liste des commandes"
+  }
 }
 
 function ajouterChampMedicament() {
@@ -31,6 +38,13 @@ function rafraichirListeMedicaments() {
   }
 }
 
+function rafraichirCommande() {
+  if (afficher) {
+    afficher.value = false;
+
+  }
+}
+
 
 
 </script>
@@ -40,10 +54,10 @@ function rafraichirListeMedicaments() {
     <RechercherMedicament/>
     <button @click="ajouterChampCommande">Faire une commande</button>
 
-      <FaireCommande v-if="afficher" :listCommande="listCommande" />
+    <FaireCommande v-if="afficher" :listCommande="listCommande" @nouvellecommande="rafraichirCommande" />
 
 
-    <button @click="aficherListeCommande">Liste des commandes client</button>
+    <button @click="aficherListeCommande">{{ textBoutonListeCommande }}</button>
     <div v-if="afficherListe">
       <h4>Commandes passées :</h4>
       <ul
