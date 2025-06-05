@@ -5,7 +5,9 @@ defineProps(["medicament"]);
 const afficherModif = ref(false);
 const medicamentAModifier = ref(null);
 const isNewImage = ref(false);
-const emit = defineEmits(["eventDeleteItem", "eventModifQteItem", "eventModifier"]);
+const emit = defineEmits(["eventDeleteItem", "eventModifQteItem", "eventModifier", "eventPoulailer"]);
+let labelPoulailer = "Mode poulailer";
+//let typeLabelPoulailer = ref(false);
 
 function ouvrirModif(medicament) {
   afficherModif.value = true;

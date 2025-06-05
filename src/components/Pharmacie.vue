@@ -5,6 +5,7 @@ import FaireCommande from "@/components/FaireCommande.vue";
 import AjoutMedicament from "@/components/AjoutMedicament.vue";
 import RechercherMedicament from "@/components/RechercherMedicament.vue";
 import Commande from "@/Commande.js";
+import Header from "@/components/Header.vue";
 const afficher = ref(false)
 const nouveauMedicament = ref(false)
 const nouvelleListe = ref(null);
@@ -50,8 +51,8 @@ function rafraichirCommande() {
 </script>
 
 <template>
-    <h1>Stock de la pharmacie</h1>
-    <RechercherMedicament/>
+  <Header/>
+  <RechercherMedicament/>
     <button @click="ajouterChampCommande">Faire une commande</button>
 
     <FaireCommande v-if="afficher" :listCommande="listCommande" @nouvellecommande="rafraichirCommande" />
@@ -75,5 +76,7 @@ function rafraichirCommande() {
 </template>
 
 <style scoped>
+
+
 
 </style>

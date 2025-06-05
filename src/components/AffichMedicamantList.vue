@@ -1,5 +1,5 @@
 <script setup>
-import {reactive} from "vue";
+import {reactive, ref} from "vue";
 import PharmacieItem from "@/components/PharmacieItem.vue";
 const url = "https://apipharmacie.pecatte.fr/api/8/medicaments"
 const listMedicament = reactive([]);
