@@ -1,7 +1,7 @@
 <script setup>
 import {ref} from "vue";
 const url = "https://apipharmacie.pecatte.fr/api/8/medicaments"
-const emit = defineEmits(['medicamentAjoute']);
+const emit = defineEmits(['rafraichirListeMedicaments']);
 
 const denomination = ref("");
 const formepharmaceutique = ref("");
@@ -21,7 +21,7 @@ function ajoutMedicament() { // ce qui est sortie du formulaire
       .then((response) =>{ return response.json()
       })
       .then((dataJSON) => {
-        emit('medicamentAjoute'); // récup des données de la BDD (dont le new "produit" ajouté)
+        emit('rafraichirListeMedicaments'); // récup des données de la BDD (dont le new "produit" ajouté)
       })
       .catch((error) => console.log(error));
 
@@ -29,21 +29,18 @@ function ajoutMedicament() { // ce qui est sortie du formulaire
 
 const handleFileUpload = (event) => {
   const file = event.target.files[0];
-  if (!file) return; // Si l'utilisateur annule la sélection du fichier, on ne fait rien
-  // FileReader est un objet JavaScript permettant de lire le contenu d'un fichier
-  // de manière asynchrone.
+  if (!file) return;
   const reader = new FileReader();
-  reader.onload = () => { // definir le traitement asynchrone du contenu du fichier
-    photo.value = reader.result // --> convertit le contenu du fichier en base64
+  reader.onload = () => {
+    photo.value = reader.result
   };
-  reader.readAsDataURL(file); // lance la lecture du fichier et donc la conversion en base64
+  reader.readAsDataURL(file);
 };
 
 </script>
 
 <template>
   <form @submit.prevent="ajoutMedicament">
-
     <input type="text" v-model="denomination" placeholder="Nom du medicament" required/>
     <input type="text" v-model="formepharmaceutique" placeholder="Forme pharmaceutique" required/>
     <input type="number" v-model="qte" placeholder="Quantité" min="1" required/>

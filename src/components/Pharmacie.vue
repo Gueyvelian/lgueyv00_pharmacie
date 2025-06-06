@@ -1,11 +1,11 @@
 <script setup>
-import AffichMedicamantList from "@/components/AffichMedicamantList.vue";
-import {reactive, ref} from "vue";
+import MedicamentList from "@/components/MedicamentList.vue";
 import FaireCommande from "@/components/FaireCommande.vue";
 import AjoutMedicament from "@/components/AjoutMedicament.vue";
-import RechercherMedicament from "@/components/RechercherMedicament.vue";
 import Commande from "@/Commande.js";
 import Header from "@/components/Header.vue";
+
+import {reactive, ref} from "vue";
 const afficher = ref(false)
 const nouveauMedicament = ref(false)
 const nouvelleListe = ref(null);
@@ -39,40 +39,36 @@ function rafraichirListeMedicaments() {
   }
 }
 
-function rafraichirCommande() {
+function displayCommande() {
   if (afficher) {
     afficher.value = false;
-
   }
 }
-
-
 
 </script>
 
 <template>
   <Header/>
-  <RechercherMedicament/>
-    <button @click="ajouterChampCommande">Faire une commande</button>
+  <button @click="ajouterChampCommande">Faire une commande</button>
 
-    <FaireCommande v-if="afficher" :listCommande="listCommande" @nouvellecommande="rafraichirCommande" />
+  <FaireCommande v-if="afficher" :listCommande="listCommande" @displayCommande="displayCommande" />
 
 
-    <button @click="aficherListeCommande">{{ textBoutonListeCommande }}</button>
-    <div v-if="afficherListe">
-      <h4>Commandes passées :</h4>
-      <ul
+  <button @click="aficherListeCommande">{{ textBoutonListeCommande }}</button>
+  <div v-if="afficherListe">
+    <h4>Commandes passées :</h4>
+    <ul
         v-for="(commande, index) in listCommande"
-        :key="commande.id">
-          <li>{{commande.pourAfficher()}}</li>
-      </ul>
-    </div>
+        :key="index">
+      <li>{{commande.pourAfficher()}}</li>
+    </ul>
+  </div>
 
-    <AffichMedicamantList ref="nouvelleListe"/>
+  <MedicamentList ref="nouvelleListe"/>
 
-    <button @click="ajouterChampMedicament">Ajout d'un medicament</button>
+  <button @click="ajouterChampMedicament">Ajout d'un medicament</button>
 
-    <AjoutMedicament v-if="nouveauMedicament" @medicamentAjoute="rafraichirListeMedicaments" />
+  <AjoutMedicament v-if="nouveauMedicament" @rafraichirListeMedicaments="rafraichirListeMedicaments" />
 </template>
 
 <style scoped>
